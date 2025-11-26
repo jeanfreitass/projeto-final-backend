@@ -12,9 +12,11 @@ const produtoSchema = new mongoose.Schema({
     valor: { 
         type: Number, 
         required: [true, "Valor do produto é obrigatório"], 
+        min: [0, "O valor não pode ser negativo"]
     },
     esgotado: {
-        type: Boolean
+        type: Boolean,
+        default: false
     }
 
 }, { timestamps: true });
