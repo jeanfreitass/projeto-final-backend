@@ -11,20 +11,20 @@ const listarProdutos = async (req, res) => {
 
 const criarProduto = async (req, res) => {
   try {
-    const { nome, preco, estoque } = req.body;
+    const { nome, valor, esgotado } = req.body;
 
-    if (!nome || preco == null) {
+    if (!nome || valor == null) {
       return res.status(400).json({ msg: 'Nome e preço são obrigatórios' });
     }
 
-    if (preco < 0) {
+    if (valor < 0) {
       return res.status(400).json({ msg: 'Preço inválido' });
     }
 
     const novoProduto = new Produto({
       nome,
-      preco,
-      estoque
+      valor,
+      esgotado
     });
 
     const produtoSalvo = await novoProduto.save();
@@ -57,15 +57,15 @@ const exibirProduto = (req, res) => {
 
 const alterarProduto = async (req, res) => {
   try {
-    const { nome, preco, estoque } = req.body;
+    const { nome, valor, esgotado } = req.body;
 
-    if (preco !== undefined && preco < 0) {
+    if (valor !== undefined && valor < 0) {
       return res.status(400).json({ msg: 'Preço inválido' });
     }
 
     if (nome !== undefined) res.produto.nome = nome;
-    if (preco !== undefined) res.produto.preco = preco;
-    if (estoque !== undefined) res.produto.estoque = estoque;
+    if (valor !== undefined) res.produto.valor = valor;
+    if (esgotado !== undefined) res.produto.esgotado = esgotado;
 
     const produtoAtualizado = await res.produto.save();
     res.status(200).json(produtoAtualizado);
