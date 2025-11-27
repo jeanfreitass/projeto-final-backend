@@ -14,7 +14,7 @@ mongoose
   .connect(url)
   .then(() => console.log("Conectado ao MongoDB"))
   .catch((err) => console.log("Erro ao conectar com mongoDB", err.message));
-mongoose.connect(uri, {
+mongoose.connect(url, {
   useNewUrlParser: true,
   useUnifiedTopology: true
 }).then(() => console.log('MongoDB conectado'))
