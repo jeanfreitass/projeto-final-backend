@@ -1,44 +1,111 @@
-# projeto-final-backend
-Projeto em grupo para nossas aulas de Backend, será entregue como nosso trabalho final.
+
+# Projeto Final Backend
+
+API RESTful para gerenciamento de produtos com autenticação JWT, validação, documentação Swagger e testes automatizados.
 
 ## Integrantes
-- Aluno 1 - Ana Carolina
-- Aluno 2 - Fábio Bernardes
-- Aluno 3 - Jean Lemos
-
-## Descrição
-API RESTful para gerenciar produtos com autenticação JWT, validações, documentação Swagger e testes automatizados.
+- Ana Carolina
+- Fábio Bernardes
+- Jean Lemos
 
 ## Requisitos
 - Node.js >= 18
 - NPM
 - MongoDB Atlas (ou local)
 
-## Instalação
-1. Clone:
-   git clone https://github.com/jeanfreitass/projeto-final-backend
-2. Acesse a pasta:
-   cd pratica10
-3. Instale dependências:
-   npm install
-4. Crie `.env` com as variáveis MONGODB_* e JWT_*
-5. Execute em desenvolvimento:
-   npm run dev
-6. Acesse documentação:
-   http://localhost:3000/api-docs
+## Instalação e Uso
+1. Clone o repositório:
+    ```sh
+    git clone https://github.com/jeanfreitass/projeto-final-backend
+    cd projeto-final-backend/projeto-backend
+    ```
+2. Instale as dependências:
+    ```sh
+    npm install
+    ```
+3. Crie um arquivo `.env` na raiz de `projeto-backend` (veja exemplo abaixo).
+4. Execute em modo desenvolvimento:
+    ```sh
+    npm run dev
+    ```
+5. Acesse a documentação Swagger:
+    - http://localhost:3000/api-docs
+
+## Exemplo de .env
+```env
+MONGO_DB_USER=seu_usuario
+MONGO_DB_PSSWD=sua_senha
+MONGO_DB_HOST=seu_host.mongodb.net
+MONGO_DB_NAME=nome_do_banco
+JWT_SECRET=sua_chave_jwt
+JWT_EXPIRES=1d
+```
 
 ## Testes
-- Para rodar os testes:
-  npm test
+Para rodar os testes automatizados:
+```sh
+npm test
+```
 
-## Endpoints (resumo)
-- POST /usuarios        -> cria usuário (201 / 422)
-- POST /usuarios/login  -> login retorna token (200 / 401)
-- POST /usuarios/renovar -> renovar token (200 / 401) [precisa Authorization: Bearer <token>]
-- GET /usuarios         -> listar usuários (200)
-- GET /usuarios/:id     -> obter por id (200 / 404)
-- PUT /usuarios/:id     -> atualizar (200 / 401) [Bearer token]
-- DELETE /usuarios/:id  -> deletar (204 / 401) [Bearer token]
+## Endpoints da API de Produtos
+
+### Autenticação
+- As rotas de criação, alteração e exclusão de produtos exigem o header:
+   `Authorization: Bearer <seu_token_jwt>`
+
+### Modelo Produto
+```json
+{
+   "_id": "...",
+   "nome": "Camiseta",
+   "valor": 49.9,
+   "esgotado": false,
+   "createdAt": "...",
+   "updatedAt": "..."
+}
+```
+
+### Rotas
+
+#### Listar produtos
+- **GET /produtos**
+- Resposta: 200 OK, array de produtos
+
+#### Criar produto
+- **POST /produtos** (protegido)
+- Body:
+   ```json
+   { "nome": "Camiseta", "valor": 49.9, "esgotado": false }
+   ```
+- Respostas:
+   - 201 Created: produto criado
+   - 400: campos obrigatórios ausentes ou valor inválido
+
+#### Buscar produto por ID
+- **GET /produtos/:id**
+- Respostas:
+   - 200 OK: produto encontrado
+   - 400: ID inválido
+   - 404: não encontrado
+
+#### Atualizar produto
+- **PUT /produtos/:id** (protegido)
+- Body (qualquer campo):
+   ```json
+   { "nome": "Novo nome", "valor": 59.9, "esgotado": true }
+   ```
+- Respostas:
+   - 200 OK: produto atualizado
+   - 400: ID inválido ou valor inválido
+   - 404: não encontrado
+
+#### Deletar produto
+- **DELETE /produtos/:id** (protegido)
+- Respostas:
+   - 204 No Content: deletado
+   - 400: ID inválido
+   - 404: não encontrado
 
 ## Observações
-- Divisão de tarefas e histórico de issues: veja a aba Issues do repositório.
+- Para autenticação, gere um token JWT usando as rotas de usuário (não incluídas neste exemplo).
+- Para mais detalhes, consulte a documentação Swagger em `/api-docs` após rodar o projeto.
