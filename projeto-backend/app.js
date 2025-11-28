@@ -20,7 +20,7 @@ mongoose
 
 // Rotas
 app.use('/produtos', produtosRouter);
-// app.use('/api-docs', apidocsRouter);
+app.use('/api-docs', apidocsRouter);
 app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
