@@ -25,7 +25,7 @@ mongoose.connect(url, {
 
 // Rotas
 app.use('/produtos', produtosRouter);
-// app.use('/api-docs', apidocsRouter);
+app.use('/api-docs', apidocsRouter);
 
 // Tratamento de erros simples
 app.use((err, req, res, next) => {
