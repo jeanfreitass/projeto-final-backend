@@ -1,23 +1,28 @@
-<<<<<<< HEAD
 # projeto-final-backend
-Projeto em grupo para nossas aulas de Backend, será entregue como nosso trabalho final.
-=======
 
-# Projeto Final Backend
+API RESTful para gerenciamento de produtos com autenticação JWT, validação, documentação com Swagger e testes automatizados com Jest.
 
-API RESTful para gerenciamento de produtos com autenticação JWT, validação, documentação Swagger e testes automatizados.
-
-## Integrantes
+## Integrantes 👨‍💻
 - Ana Carolina
 - Fábio Bernardes
 - Jean Lemos
 
-## Requisitos
+
+## 🛠 Tecnologias
+- Node.js
+- JWT (JSON Web Token)
+- Jest
+- Swagger
+- MongoDB
+
+## ⚙️ Requisitos
 - Node.js >= 18
 - NPM
-- MongoDB Atlas (ou local)
+- MongoDB
+- Arquivo `.env` configurado
 
-## Instalação e Uso
+
+## Instalação e Uso 📩
 1. Clone o repositório:
     ```sh
     git clone https://github.com/jeanfreitass/projeto-final-backend
@@ -26,6 +31,11 @@ API RESTful para gerenciamento de produtos com autenticação JWT, validação, 
 2. Instale as dependências:
     ```sh
     npm install
+    npm install --save-dev jest
+    npm install mongoose
+    npm install jsonwebtoken
+    npm install dotenv
+    npm install --save-dev nodemon
     ```
 3. Crie um arquivo `.env` na raiz de `projeto-backend` (veja exemplo abaixo).
 4. Execute em modo desenvolvimento:
